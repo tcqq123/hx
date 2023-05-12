@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{$web_config['name']}</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" href="__CSS__/app.css" media="all" />
+    <link rel="stylesheet" href="__CSS__/themes/default.css" media="all" id="skin" kit-skin />
+    <link rel="stylesheet" href="__CSS__/admin.css" />
+    <link rel="stylesheet" href="/static/admin/css/public.css" media="all">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style type="text/css" media="all">
+        .kit-nav .layui-nav-item {
+                line-height: 80px;
+            }
+        .layui-tab .layui-tab-title,.layui-tab .fa{
+            display: none;
+        }
+        .operation-menu a {
+    margin: 0 10px;
+
+    margin-top: 10px;
+    display: inline-block;
+}
+.txl{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #42e695, #3bb2b8)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    margin-top: 15px;
+    margin-left: 15px;
+    padding: 0 20px;
+}
+.tcl{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #f54ea2, #ff7676)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    margin-top: 15px;
+    margin-left: 15px;
+    padding: 0 20px;
+}
+
+.tel{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #fff, #fff)!important;
+    border-radius: 7px!important;
+    color: red!important;
+    margin-top: 15px;
+    margin-left: 50px;
+    padding: 0;
+}
+.tal{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #4298ff, #1473e6)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    margin-top: 15px;
+    margin-left: 15px;
+    padding: 0 20px;
+}
+.layui-table[lay-size=sm] td, .layui-table[lay-size=sm] th{
+    font-weight: 600
+}
+       
+    </style>
+    <script>
+    // $(function(){
+    //   $('#container').addClass("kit-body-folded");
+      
+    //   $('#container').mouseenter(function() {
+    //         $(this).addClass("kit-body-folded");
+    //         $('#leftbox').addClass("kit-sided");
+    //     });
+    //   $('#container').mouseleave(function() {
+    //         $(this).removeClass("kit-body-folded");
+    //         $('#leftbox').removeClass("kit-sided");
+    //     }); 
+    // })
+
+    </script>
+</head>
+
+<body class="kit-theme">
+    <div class="layui-layout layui-layout-admin kit-layout-admin">
+        <div style="background: #683ab6;height: 80px;" class="layui-header">
+            <div class="layui-logo" id="logo" style="background: #fff;color:#683ab6;">
+                <span><img style="width: 80%;" src="__CSS__/logo.jpg" alt="" /></span>
+                </div>
+           <!--<ul class="layui-nav layui-layout-left kit-nav kit-tab-tool-body">-->
+           <!--     <li class="layui-nav-item"><a id="kit-side-fold" title="左侧菜单" style="color:#333;"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>-->
+           <!--     <li class="layui-nav-item"><a href="{:url('admin/index/index')}" title="管理主页" style="color:#333;"><i class="fa fa-life-ring" aria-hidden="true"></i></a></li>-->
+           <!--     <li class="layui-nav-item"><a id="clear" title="清空缓存" style="color:#333;"><i class="fa fa-university" aria-hidden="true"></i></a></li>-->
+           <!--     <li class="layui-nav-item"><a class="kit-item" data-target="refresh" title="刷新当前页" style="color:#333;" id="refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>-->
+           <!-- </ul>-->
+            
+            <ul class="layui-nav layui-layout-left kit-nav kit-tab-tool-body">
+                <!--<li class="layui-nav-item"><a id="kit-side-fold" title="左侧菜单" style="color:#333;"><i class="fa fa-arrow-left" aria-hidden="true" style="color:#fff;font-size: 18px;"></i></a></li>-->
+                <li class="layui-nav-item" style="color:#fff;font-size: 28px;">华夏联盟通讯录管理系统App二维码下载及链接</li>
+              
+            </ul>
+            <ul class="layui-nav layui-layout-right kit-nav">
+                <li class="layui-nav-item"><a href="javascript:;" id="tag" style="color:#fff;"><i class="fa fa-tag" aria-hidden="true"></i></a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" style="color:#fff;">
+                        <img src="{$cookie.thumb|geturl}" class="layui-nav-img">欢迎, {empty name="$cookie.nickname"}{$cookie.name}{else /}{$cookie.nickname}{/empty}
+                    </a>
+                </li>
+                <li class="layui-nav-item"><a href="javascript:;"  id="logout" style="color:#fff;"><span><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</span></a></li>
+            </ul>
+        </div>
+        <!--<div style="margin: 0;" class="layui-tab">-->
+        <!--  <ul style="display:block;z-index: 9999;height: 70px;" class="layui-tab-title">-->
+            <!--<a href="http://101.32.181.124:8888/down/AEjdi0ncQcVy" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">Android系统</a>-->
+            
+        <!--    <a href="{:url('appv1/apps')}" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">Android系统</a>-->
+            
+        <!--    <a href="https://dkhglsd01.xyz/GqyasuO8.html" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">iOS系统</a>-->
+        <!--    <a href="http://43.129.184.119/" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tcl">常见问题解决方案</a>-->
+           
+              
+        <!--   <a href="#" style="height: 40px;line-height: 40px;width: 300px;margin-left: 60px;" class="layui-btn layui-btn-danger layui-btn-sm tel">-->
+        <!--       <marquee style="font-size: 16px;" direction="left">-->
+        <!--        更新内容：《一键群发》内容已经更新，可以上传一张照片，编辑内容，自动录入客户通讯录。注意：一键群发有两个入口，请从外面主页这个入口点进去，这个入口进去的自动录入正确的通讯录，从通讯录入口点进去自动录入通讯录的号码是错的。推广建议：安卓使用安装包，苹果尽量发送二维码推广！-->
+        <!--        </marquee>-->
+        <!--</a>   -->
+        
+        
+        
+        
+        <!--  </ul>-->
+        <!--</div> -->
+        
+        <div class="tplay-body-div">
+   
+  <div style="box-shadow:none" class="tplay-body-div">
+      <!--<div>-->
+      <!--     <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tcl">阿里云ID：216413213241</div>-->
+      <!--  <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">余额：5426.21</div>-->
+      <!--  <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">套餐：海外短信</div>-->
+      <!--  <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">签名模板：模板1</div>-->
+      <!--  <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">模板签名：KC网络电话</div>-->
+      <!--</div>-->
+   
+    
+    
+    <div style="display:flex;width:100%;justify-content:space-between;">
+        <div style="width:40%;">
+            
+            <div style="margin-top: 20px;" class="dropzone dropzone-single mb-3 dz-clickable">
+            <div style="padding: 1rem 1rem;height: 600px;border: 1px solid #d2ddec;" class="dz-default dz-message">
+                <button style="font-size: 18px; color:red; height:15%" class="dz-button" type="button">安卓二维码下载（浏览器扫码下载）</button>
+                
+                <div style="display:flex;flex-wrap: wrap;justify-content: space-between; height:85%">
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                </div>
+             
+            </div>
+            </div>
+            
+           
+            
+            
+    
+    
+        </div>
+        
+        <div style="width:16%; height:600px; text-align: center;font-size: 24px;padding: 0.5rem;margin-top: 20px;" class="form-control">
+             <button style="font-size: 18px; color:red; height:15%" class="dz-button" type="button">安卓安装包下载</button>
+                
+                <div style="display:flex;flex-wrap: wrap;flex-direction: column;justify-content: space-around;; height:85%">
+                    <button style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">点击下载</button>
+                    <button style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">点击下载</button>
+                    <button style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">点击下载</button>
+                    <button style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">点击下载</button>
+                    
+                    
+                </div>
+        </div>
+        
+        
+         <div style="width:40%;">
+            
+            <div style="margin-top: 20px;" class="dropzone dropzone-single mb-3 dz-clickable">
+            <div style="padding: 1rem 1rem;height: 600px;border: 1px solid #d2ddec;" class="dz-default dz-message">
+                <button style="font-size: 18px; color:red; height:15%" class="dz-button" type="button">iOS二维码及链接（浏览器打开）</button>
+                
+                <div style="display:flex;flex-wrap: wrap;justify-content: space-between; height:85%">
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                    <div style="width:45%;">
+                        <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+                        <span>文字</span>
+                    </div>
+                </div>
+             
+            </div>
+            </div>
+            
+           
+            
+            
+    
+    
+        </div>
+    </div>
+    
+    
+    
+    
+    
+  </div>
+</div>

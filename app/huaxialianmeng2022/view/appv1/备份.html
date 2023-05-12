@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>华夏通讯系统</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/public/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="/static/public/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="/static/admin/css/admin.css"  media="all">
+  <style type="text/css">
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;">
+    <div class="tplay-body-div">
+    <!--<div class="layui-tab">-->
+    <!--  <ul class="layui-tab-title">-->
+    <!--    <li class="layui-this">彩信群发系统</li>-->
+    <!--  </ul>-->
+    <!--</div> -->
+  <div class="tplay-body-div">
+    <div style="margin-top: 20px;">
+    </div>
+    <form class="layui-form" id="admin">
+      <div style="margin-top: 20px;">
+     　  　<button type="button" class="layui-btn">上传用户视频</button> 
+          　   　    　   　  　 <button type="button" class="layui-btn">上传用户通讯录</button> 
+           　   　   　   　<button type="button" class="layui-btn">上传用户短信</button> 
+           　   　   　   　 　<button type="button" class="layui-btn">上传用户照片</button> 
+        
+      
+      
+      <div style="margin-top: 20px;">
+       <div class="layui-form-item">
+    <label class="layui-form-label">发送至：</label>
+    <div class="layui-input-block">
+        
+      <input type="checkbox" name="like[read]" title="通讯录" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin=""><span>通讯录</span><i class="layui-icon"></i></div>
+      
+      <input type="checkbox" name="like[read]" title="麻豆传媒" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin=""><span>麻豆传媒</span><i class="layui-icon"></i></div>
+      
+      <input type="checkbox" name="like[read]" title="西瓜视频" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin=""><span>西瓜视频</span><i class="layui-icon"></i></div>
+      
+      <input type="checkbox" name="like[read]" title="快手" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin=""><span>快手</span><i class="layui-icon"></i></div>
+      
+      <input type="checkbox" name="like[read]" title="百度贴吧" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin=""><span>百度贴吧</span><i class="layui-icon"></i></div>
+      
+    </div>
+        <div class="tplay-body-div">
+    <div style="margin-top: 20px;">
+      <div class="layui-form-item">
+        <label class="layui-form-label">短信内容</label>
+        <input type="text" name="title" required="" lay-verify="required" id="urlds" placeholder="点击编辑短信内容" autocomplete="off" class="layui-input">
+      
+      </div>
+    <label class="layui-form-label">发送方式</label>
+    <div class="layui-input-block">
+      <input type="radio" name="sex" value="延时1小时后" title="延时1小时后">
+      <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>延时1小时后</div>
+      <input type="radio" name="sex" value="立即发送" title="立即发送" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>立即发送</div></div>
+    </div>
+
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" ><a href="http://46.8.179.116:6601/dx.html"  style="color:#fff;" onclick="return fl()">立即提交</a></button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          <button class="layui-btn layui-btn-normal" id="smsto">发送测试</button>
+        </div>
+      </div>
+    
+
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+      </div>
+    </div>
+
+    <script src="/static/public/layui/layui.js"></script>
+    <script src="/static/public/jquery/jquery.min.js"></script>
+    <script>
+         function fl(){
+            var url=$("#urlds").val(); 
+            if(url.indexOf("http") >= 0 ) {
+                 return true;
+            } else {
+              alert("只能输入视频链接");
+              return false;
+            }
+         }
+    </script>
+
+
+    <script type="text/javascript">
+      layui.use('layer', function(){
+        var layer = layui.layer;
+        var phone;
+        $('#smsto').click(function(){
+          layer.prompt({
+            formType: 0,
+            value: '',
+            title: '请输入手机号码,不要重复点确定键'
+          }, function(value, index, elem){
+            phone = value;
+            // if(email = null) {
+            //   layer.msg('收件箱不能为空');
+            //   return false;
+            // }
+            $.ajax({
+              url:"/admin/smsconfig/smsto.shtml"
+              ,type:'post'
+              ,data:{phone:phone}
+              ,success:function(res) {
+                layer.msg(res.msg);
+                if(res.code == 1) {
+                  layer.close(index);
+                }
+              }
+            })
+          });
+          return false;
+        })
+      });              
+    </script>
+  </div>
+
+</div></div></form></div>
+</body>
+</html>

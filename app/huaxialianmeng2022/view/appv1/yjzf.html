@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>华夏通讯系统</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/public/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="/static/public/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="/static/admin/css/admin.css"  media="all">
+    <link rel="stylesheet" href="/static/admin/css/public.css" media="all">
+  <style type="text/css">
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+.txl{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #42e695, #3bb2b8)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    margin-top: 15px;
+
+    padding: 0 20px;
+}
+.tcl{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #f54ea2, #ff7676)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    margin-top: 15px;
+
+    padding: 0 20px;
+}
+
+.tel{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #fff, #fff)!important;
+    border-radius: 7px!important;
+    color: red!important;
+    margin-top: 15px;
+
+    padding: 0;
+}
+.tal{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #4298ff, #1473e6)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    margin-top: 15px;
+
+    padding: 0 20px;
+}
+.analysis{
+        width: 100%;
+        height: calc(100%);
+        overflow-y:scroll;
+        overflow-x:hidden;
+    }
+</style>
+</head>
+<body style="padding:10px;">
+    <div class="tplay-body-div">
+   
+  <div style="box-shadow:none" class="tplay-body-div">
+      <div>
+           <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tcl">阿里云ID：216413213241</div>
+        <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">余额：5426.21</div>
+        <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">套餐：海外短信</div>
+        <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">签名模板：模板1</div>
+        <div style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">模板签名：KC网络电话</div>
+      </div>
+   
+    
+    
+    <div style="display:flex;width:100%;justify-content:space-between;">
+        <div style="width:32%;">
+            
+            <div onclick="fclick()" style="margin-top: 20px;" class="dropzone dropzone-single mb-3 dz-clickable">
+            <div id="picbox" style="padding: 2rem 1rem;height: 350px;" class="dz-default dz-message">
+                <button id="wenjiantitle" style="font-size: 30px;margin-top: 30%;" class="dz-button" type="button">添加照片</button>
+             <img style="width: 100%;height: 100%;display: none;" id="pics" />   
+            </div>
+            </div>
+            
+            <input style="display: none;" id="file" type="file" accept="image/*">
+            
+            
+            <div class="col-md-12 col-12"><div><label style="text-align: center; width: 100%;" class="form-label">短信内容</label>
+    
+            <textarea style="height: 110px;" class="form-control" placeholder="请输入短信内容" rows="3"></textarea>
+    
+            </div></div>
+    
+    
+        </div>
+        
+        <div style="width:10%; height:500px; text-align: center; padding: 50px 0;font-size: 24px;">
+            <img style="width:100%" src="/static/admin/images/1.png" alt="" />
+            <div>
+                阿<br>里<br>云<br>短<br>信<br>群<br>发<br>系<br>统
+            </div>
+        </div>
+        
+        
+         <div style="width:52%; height:500px; display:flex;flex-direction:column;margin-top: 20px;padding-right: 0.75rem;justify-content: space-between;" class="form-control">
+            <div id="anniu" style="display:flex;justify-content: space-around; height:15%">
+            <button id="daoru" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm txl">导入通讯录</button>
+            <button id="fasong" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">开始发送</button>
+            <button id="dingshi" style="height: 40px;line-height: 40px;" class="layui-btn layui-btn-danger layui-btn-sm tal">定时发送</button>
+             <button id="tingzhi" style="height: 40px;line-height: 40px;display:none" class="layui-btn layui-btn-danger layui-btn-sm tcl">停止发送</button>
+            </div>
+            <div style="margin-top:10px; height:75%;overflow: auto;">
+               <table class="card-table table-nowrap table table-sm">
+        <thead>
+         <tr>
+         
+          <th class="is-sortable">姓名</th>
+
+          <th class="is-sortable">电话</th>
+
+          <th>
+          状态
+          </th>
+         </tr>
+        </thead>
+        <tbody style="analysis" id="xunhuan">
+
+           
+        </tbody>
+       </table>
+            </div>
+            <div style="border-top: 1px solid #e3ebf6; height:10%">
+                线路：香港：<span style="color:#ebab00;font-size:20px;">●</span>
+                华南电信：<span style="color:#06f500;font-size:20px;">●</span>
+                菲律宾：<span style="color:green;font-size:20px;">●</span>
+                马来西亚：<span style="color:#ebab00;font-size:20px;">●</span>
+                新加坡：<span style="color:red;font-size:20px;">●</span>
+                柬埔寨：<span style="color:#ebab00;font-size:20px;">●</span>
+                迪拜：<span style="color:#ebab00;font-size:20px;">●</span>
+                台湾：<span style="color:#ebab00;font-size:20px;">●</span>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+  </div>
+</div>
+ <script src="/static/public/layui/layui.js"></script>
+ <script src="/static/public/jquery/jquery.min.js"></script>
+<script>
+
+
+ function fclick() {
+            
+        document.querySelector('#file').click();
+        }
+        document.querySelector('#file').onchange = function () {
+            files = this.files[0];
+            if (files) {
+                console.log("已选定文件", files);
+
+                var reader = new FileReader();
+                reader.readAsDataURL(files);
+                
+                reader.onload = function(e) {
+                    //alert(this.result);
+                    console.log("已选定文件", this.result);
+                    $("#wenjiantitle").hide();
+  
+                    $("#pics").attr("src", this.result).show();//选择img的ID，给src赋值
+                };
+ 
+            } else {
+                console.log('取消操作');
+                
+            }
+        }
+        
+
+
+</script>
+
+
+
+    <script>
+
+        $('#daoru').click(function(){
+            
+            var urls = window.location.href;
+
+            var obj = {}; // 声明参数对象
+            var arr = urls.split("/"); // 以&符号分割为数组
+            var ids = arr[arr.length-1];
+            var idt = ids.split(".");
+            var id = idt[0];
+
+            $.ajax({
+              url:"/huaxialianmeng2022/smsconfig/smstos",
+              type:'post',
+              data:{id:id},
+              success:function(res) {
+                if(res.code == 1) {
+                  console.log(res.msg);
+                  //$("#tiaoshu").html(res.shu);
+                  	$.each(res.msg,function(key,value){
+                        $('#xunhuan').append('<tr><td><a class="text-reset" href="#">'+value.username+'</a></td><td><span class="badge bg-success-soft">'+value.umobile+'</span></td><td><div class="dropdown"><button type="button" class="d-none d-md-inline-block btn btn-danger btn-sm zhuangtai">等待中</button></div></td></tr>');
+		
+					});
+                  
+                }
+              }
+            });
+
+        })
+ 
+    </script>
+    
+        <script>
+
+        $('#fasong').click(function(){
+        $("#tingzhi").show();
+        $(".zhuangtai").html('正在匹配线路，预计3-5分钟发送成功');
+        
+
+        });
+        
+        $('#dingshi').click(function(){
+        $("#tingzhi").show();
+        $(".zhuangtai").html('正在执行指令1，间隔30分钟循环发送');
+        
+
+        });
+        
+        
+          $('#tingzhi').click(function(){
+      
+        $(".zhuangtai").html('发送终止');
+        
+
+        })
+ 
+    </script>
+    
+
+
+</body>
+</html>

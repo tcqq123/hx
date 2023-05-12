@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+    <style type="text/css">
+        /* tooltip */
+        #tooltip{
+            position:absolute;
+            border:1px solid #ccc;
+            background:#333;
+            padding:2px;
+            display:none;
+            color:#fff;
+        }
+        td{
+            font-size: 15px !important;
+        }
+    </style>
+</head>
+<body style="padding:10px;">
+<div class="tplay-body-div">
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">本机手机号管理</li>
+        </ul>
+    </div>
+
+    <table class="layui-table" lay-size="sm">
+        <colgroup>
+            <col width="50">
+            <col width="100">
+            <col width="40">
+            <col width="40">
+            <col width="70">
+            <col width="100">
+            <col width="100">
+            <col width="400">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>邀请码</th>
+            <th>注册手机号码</th>
+            <th>本机号码</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="info" id="vo"}
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.invitation_code}</td>
+            <td>{$vo.phone}</td>
+            <td>{$vo.physical_phone}</td>
+
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+
+
+    <script type="text/javascript">
+
+    </script>
+</div>
+</body>
+</html>

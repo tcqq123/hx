@@ -1,0 +1,65 @@
+        <!--<div class="layui-side layui-bg-black kit-side kit-sided" id="leftbox" style="background-color: #fff;top: 80px;">-->
+        <!--    <div style="background-color: #fff;" class="layui-side-scroll">-->
+        <!--        <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>-->
+        <!--        {volist name="menus" id="data"}-->
+        <!--            <li class="layui-nav-item {if condition="$data.is_open eq 1"}layui-nav-itemed{/if}">-->
+        <!--                <a href="javascript:;"><i class="fa {$data.icon}" aria-hidden="true"></i><span> {$data.name}</span></a>-->
+        <!--                <ul class="menu_ul layui-nav-child">-->
+        <!--                {notempty name="$data.list"}{volist name="$data.list" id="vo"}-->
+        <!--                    {notempty name="$vo.list"}-->
+        <!--                    <li>-->
+        <!--                        <a class="table" href="javascript:;"><i class="fa {$vo.icon}"></i><span> {$vo.name}</span> <span class="angle"><i class="fa fa-angle-down"></i><span></span></a>-->
+        <!--                        <ul {if condition="$vo.is_open eq 1"}style="display:block;"{/if}>-->
+        <!--                            {volist name="$vo.list" id="co"}-->
+        <!--                            <li><a href="javascript:;" data-url="{$co.url}" data-icon="{$co.icon}" data-title="{$co.name}" kit-target data-id='{$co.id}'><i class="fa {$co.icon}" aria-hidden="true"></i><span> {$co.name}</span></a></li>-->
+        <!--                            {/volist}-->
+        <!--                        </ul>-->
+        <!--                    </li>-->
+        <!--                    {else /}-->
+        <!--                    <li>-->
+        <!--                        <a href="javascript:;" data-url="{$vo.url}" data-icon="{$vo.icon}" data-title="{$vo.name}" kit-target data-id='{$vo.id}' ><i class="fa {$vo.icon}" aria-hidden="true">1</i><span> {$vo.name}</span></a>-->
+        <!--                    </li>-->
+        <!--                    {/notempty}-->
+        <!--                {/volist}{/notempty}-->
+        <!--                </ul>-->
+        <!--            </li>-->
+        <!--        {/volist}-->
+        <!--        <style>-->
+        <!--        .layui-nav-tree .layui-nav-items{-->
+        <!--            display: block;-->
+        <!--            width: 100%;-->
+        <!--            line-height: 45px;-->
+        <!--        }-->
+        <!--         .layui-nav-tree .layui-nav-items:hover{-->
+        <!--                background-color: color: rgba(104,59,178,.7)!important;-->
+        <!--            }-->
+        <!--                .layui-nav-tree .layui-nav-items a {-->
+        <!--                height: 45px;-->
+        <!--                line-height: 45px;-->
+        <!--                text-overflow: ellipsis;-->
+        <!--                overflow: hidden;-->
+        <!--                white-space: nowrap;-->
+        <!--            }-->
+        <!--            .layui-nav .layui-nav-items a {-->
+        <!--                display: block;-->
+        <!--                padding: 0 20px;-->
+        <!--                color: #fff;-->
+        <!--                color: rgba(255,255,255,.7);-->
+        <!--                transition: all .3s;-->
+        <!--                -webkit-transition: all .3s;-->
+        <!--            }-->
+        <!--        </style>-->
+        <!--        {volist name="newmenu" id="data" key="key"}-->
+        <!--        <li style="background-color: #fff;" class="layui-nav-items">-->
+        <!--                <a style="color: #000;" {if(stripos($data.url,'http')!==false)} -->
+        <!--                 href="{$data.url}" target="_blank"  -->
+        <!--               {else} -->
+        <!--                href="javascript:;"  data-url="{$data.url}" data-title="{$data.name}" kit-target data-id='{$key}'-->
+                        
+        <!--                {/if}  ><i class="fa" aria-hidden="true"></i>-->
+        <!--                <span> {$data.name}</span>-->
+        <!--                </a>-->
+        <!--        {/volist}-->
+        <!--        </ul>-->
+        <!--    </div>-->
+        <!--</div>-->
